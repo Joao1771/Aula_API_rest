@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config(); // configurar o .env e importa-lo
 
 module.exports = {
   dialect: 'mariadb',
