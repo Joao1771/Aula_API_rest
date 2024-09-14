@@ -21,6 +21,8 @@ class App {
     this.app.use(express.json());
   }
 
+  //
+
   routes() {
     this.app.use('/', homeRoutes);
     this.app.use('/users/', userRoutes);
