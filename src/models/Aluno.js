@@ -4,7 +4,7 @@ export default class Aluno extends Model {
   static init(sequelize) {
     super.init({
       nome: Sequelize.STRING,
-      sobrenome: Sequelize.STRING,
+      sobrenome: Sequelize.STRING, // modelo criado apenas para teste do mariadb e sql
       email: Sequelize.STRING,
       idade: Sequelize.INTEGER,
       peso: Sequelize.FLOAT,

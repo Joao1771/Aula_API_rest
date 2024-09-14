@@ -1,7 +1,7 @@
 import User from '../models/User';
 
 class UserController {
-  async store(req, res) {
+  async store(req, res) { // adiciona um
     try {
       const novoUser = await User.create(req.body);
       return res.json(novoUser);
@@ -12,7 +12,7 @@ class UserController {
     }
   }
 
-  // index
+  // index (mostra todos)
   async index(req, res) {
     try {
       const users = await User.findAll();
@@ -22,7 +22,7 @@ class UserController {
     }
   }
 
-  // show
+  // show (mostra um)
   async show(req, res) {
     try {
       const user = await User.findByPk(req.params.id);
@@ -32,7 +32,7 @@ class UserController {
     }
   }
 
-  // update
+  // update (modifica um)
   async update(req, res) {
     try {
       if (!req.params.id) {
@@ -56,7 +56,7 @@ class UserController {
     }
   }
 
-  // delete
+  // delete (deleta um)
   async delete(req, res) {
     try {
       if (!req.params.id) {

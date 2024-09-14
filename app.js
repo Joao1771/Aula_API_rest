@@ -21,7 +21,9 @@ class App {
     this.app.use(express.json());
   }
 
-  //
+  // npm -> server.js -> app.js -> express -> controllers -> config/models/database -> middlewares v
+  // -> routes -> frontend(usuario)
+  // esquema para eu entender um pouco, mas não é assim que funciona
 
   routes() {
     this.app.use('/', homeRoutes);

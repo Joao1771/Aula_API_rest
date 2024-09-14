@@ -1,4 +1,4 @@
-import Sequelize, { Model } from 'sequelize';
+import Sequelize, { Model } from 'sequelize'; // Quem faz a conexão entre o SQL e o JS
 import bcryptjs from 'bcryptjs';// Quem faz o hash: pega a senha e cria "criptografia"
 
 export default class User extends Model {
@@ -21,7 +21,7 @@ export default class User extends Model {
           msg: 'Email já existe',
         },
         validate: {
-          isEmail: {
+          isEmail: { // validação básica de email
             msg: 'Email inválido',
           },
         },
@@ -34,7 +34,7 @@ export default class User extends Model {
         type: Sequelize.VIRTUAL, // VIRTUAL: Não armazenada no Data Base
         defaultValue: '',
         validate: {
-          len: {
+          len: { // lenght tamanho
             args: [6, 50],
             msg: 'Senha deve ter entre 6 e 50 caracteres',
           },
