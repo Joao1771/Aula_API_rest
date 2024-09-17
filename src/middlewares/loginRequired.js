@@ -17,12 +17,13 @@ export default async (req, res, next) => {
     const { id, email } = dados;
     const user = await User.findOne({ // Isso caso o email do user seja alterado após o token,
       where: { //                        necessitando de outro token porque o email mudou
-        id, email, //                    (precisar de email é o que login por sessão faz)
+        id,
+        email, //                    (fica similar ao que login por sessão faz)
       },
     });
     if (!user) {
       return res.status(401).json({
-        errors: ['Usuário errado'],
+        errors: ['Token e email não batem'], // para eu saber se o email foi trocado
       });
     }
     req.userId = id;
