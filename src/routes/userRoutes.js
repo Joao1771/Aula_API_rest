@@ -6,8 +6,8 @@ import loginRequired from '../middlewares/loginRequired';
 const router = new Router();
 
 // Mostrar todos os users e mostrar outro user não existe em uma aplicação real
-router.get('/', loginRequired, userController.index);// mostrar todos
-router.get('/:id', userController.show);// mostrar um user
+// router.get('/', loginRequired, userController.index);// mostrar todos
+// router.get('/:id', userController.show);// mostrar um user
 
 router.post('/', userController.store);// adicionar
 router.put('/', loginRequired, userController.update);// modificar dados de um user
