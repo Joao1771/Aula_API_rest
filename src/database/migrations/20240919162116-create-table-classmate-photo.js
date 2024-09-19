@@ -1,36 +1,30 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = { // arquivo criado com comando e modificado
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('alunos', {
+    await queryInterface.createTable('fotos', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
       },
-      nome: {
+      originalname: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      sobrenome: {
+      filename: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      email: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      idade: {
+      aluno_id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
-      },
-      peso: {
-        type: Sequelize.FLOAT,
-        allowNull: false,
-      },
-      altura: {
-        type: Sequelize.FLOAT,
-        allowNull: false,
+        allowNull: true,
+        references: {
+          model: 'alunos',
+          key: 'id',
+        },
+        onDelete: 'SET NULL', // se a tabela da Fk for alterada seta esse obj para null
+        onUpdate: 'CASCADE', // tipo inherit, se a tabela da FK for alterada essa FK tbm será
       },
       created_at: {
         type: Sequelize.DATE,
@@ -39,11 +33,11 @@ module.exports = { // arquivo criado com comando e modificado
       updated_at: {
         type: Sequelize.DATE,
         allowNull: false,
-      },
+      }, //      para criar: npx sequelize migration:create --name=create-table-classmate-photo
     }); //                 para executar: npx sequelize db:migrate
   },
 
   async down(queryInterface) {
-    await queryInterface.dropTable('alunos');
+    await queryInterface.dropTable('fotos');
   },
 };

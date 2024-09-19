@@ -29,7 +29,7 @@ module.exports = { // arquivo criado com comando e modificado
         type: Sequelize.DATE,
         allowNull: false,
       },
-    });
+    }); //                 para executar: npx sequelize db:migrate
   },
 
   async down(queryInterface) {

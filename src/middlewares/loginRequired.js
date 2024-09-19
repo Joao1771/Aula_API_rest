@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken'; // middleware que fica entre o acesso e a db e pode bloquear
+import User from '../models/User';
 
-export default (req, res, next) => {
+export default async (req, res, next) => {
   const { authorization } = req.headers; // header no insomnia com authorization
 
   if (!authorization) { // status 401 = Não autorizado
@@ -14,6 +15,17 @@ export default (req, res, next) => {
   try { //      jsonwebtoken verifica se é valido
     const dados = jwt.verify(token, process.env.TOKEN_SECRET); // .env token
     const { id, email } = dados;
+    const user = await User.findOne({ // Isso caso o email do user seja alterado após o token,
+      where: { //                        necessitando de outro token porque o email mudou
+        id,
+        email, //                    (fica similar ao que login por sessão faz)
+      },
+    });
+    if (!user) {
+      return res.status(401).json({
+        errors: ['Token e email não batem'], // para eu saber se o email foi trocado
+      });
+    }
     req.userId = id;
     req.userEmail = email;
     return next(); // next para passar do middleware
