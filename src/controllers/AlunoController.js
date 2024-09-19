@@ -44,7 +44,7 @@ class AlunoController {
         // em qual ordem? por número de id, DESCrescente
         include: {
           model: Foto,
-          attributes: ['originalname', 'filename'],
+          attributes: ['originalname', 'url', 'filename'],
         },
       });
       if (!aluno) {
