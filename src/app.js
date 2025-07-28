@@ -1,5 +1,5 @@
-import dotenv from 'dotenv';
-import { resolve } from 'path';
+import dotenv from 'dotenv'; // .env
+import { resolve } from 'path'; // {resolve} do path para achar os caminhos dos arquivos
 
 dotenv.config();
 
@@ -16,11 +16,15 @@ import alunoRoutes from './routes/alunoRoutes';
 import fotoRoutes from './routes/fotoRoutes';
 
 const whiteList = [
-  'http://localhost:3000',
+  'http://localhost:3001',
 ];
 const corsOptions = {
   origin(origin, callback) {
-
+    if (whiteList.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
   },
 };
 
@@ -32,7 +36,7 @@ class App {
   }
 
   middlewares() {
-    this.app.use(cors());
+    this.app.use(cors(corsOptions));
     this.app.use(helmet());
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(express.json());
@@ -41,7 +45,7 @@ class App {
 
   // npm -> server.js -> app.js -> express -> controllers -> config/models/database -> middlewares v
   // -> routes -> frontend(usuario)
-  // esquema para eu entender um pouco, mas não é assim que funciona
+  // esquema para eu entender um pouco, mas provavel que não é assim que funcione
 
   routes() {
     this.app.use('/', homeRoutes);

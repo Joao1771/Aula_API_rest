@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken'; // tecnologia para criação de tokens
+import jwt from 'jsonwebtoken'; // tecnologia para criação de tokens (chaves longas)
 import User from '../models/User';
 
 class TokenController {
@@ -29,7 +29,7 @@ class TokenController {
     const token = jwt.sign({ id, email }, process.env.TOKEN_SECRET, { // .env do token
       expiresIn: process.env.TOKEN_EXPIRATION, // .env do tempo para token expirar
     });
-    return res.json({ token }); // { "token": "token" }
+    return res.json({ token, user: { nome: user.nome, id, email } }); // { "token": "token" }
   }
 }
 
